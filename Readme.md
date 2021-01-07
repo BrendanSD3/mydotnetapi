@@ -4,4 +4,5 @@
 Handy trick i learned for creating a dotnet gitignore file 
 ```dotnet new gitignore```
 
-* I hope to deploy this to heroku soon using a buildpack
+- [x] I hope to deploy this to heroku soon using a buildpack
+- [x] Deployed to heroku https://mydotnetapi.herokuapp.com/
