@@ -9,7 +9,8 @@ function getItems() {
 }
 /* When the web API returns a successful status code, 
 the _displayItems function is invoked.
- Each to-do item in the array parameter accepted by _displayItems is added to a table with Edit and Delete buttons. If the web API request fails, an error is logged to the browser's console.
+ Each to-do item in the array parameter accepted by _displayItems is added to a table with Edit and Delete buttons. 
+ If the web API request fails, an error is logged to the browser's console.
  */
  function addItem() {
   const addNameTextbox = document.getElementById('add-name');
@@ -31,6 +32,8 @@ the _displayItems function is invoked.
     .then(() => {
       getItems();
       addNameTextbox.value = '';
+     
+      document.getElementById('itemadded').style.display='block';
     })
     .catch(error => console.error('Unable to add item.', error));
 }
@@ -51,6 +54,63 @@ function displayEditForm(id) {
   document.getElementById('edit-isComplete').checked = item.isComplete;
   document.getElementById('editForm').style.display = 'block';
 }
+
+
+
+// Function to update when a checkbox is ticked or unticked 
+function testcheckbox(id){
+    //console.log("Something changed with id number: ", id);
+    const item = todos.find(item => item.id === id);
+    checkbox=document.getElementById(id);
+    
+    if(checkbox.checked==true)
+    {
+        item.isComplete=true;
+        //console.log("checked" , item.isComplete);
+        updateCheckbox(item);
+        const element1=document.getElementById("completed");
+        element1.classList.add('animate__animated','animate__heartBeat');
+        element1.classList.remove('animate__animated','animate__heartBeat');
+        void element1.offsetWidth;
+        element1.classList.add('animate__animated','animate__heartBeat');
+        //element1.classList.remove('animate__animated','animate__heartBeat');
+    }
+    else{
+        item.isComplete=false;
+        updateCheckbox(item);
+        const element=document.getElementById("incomplete");
+        element.classList.add('animate__animated','animate__heartBeat');
+        element.classList.remove('animate__animated','animate__heartBeat');
+        void element.offsetWidth;
+        element.classList.add('animate__animated','animate__heartBeat');
+        
+       
+
+    }
+}
+
+function updateCheckbox(item) {
+    //console.log("in updatecheckbox", item);
+
+    const itemId=item.id;
+  
+    fetch(`${uri}/${itemId}`, {
+      method: 'PUT',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(item)
+    })
+    .then(() => getItems())
+    .catch(error => console.error('Unable to update item.', error));
+   
+    return false; 
+  }
+
+
+
+
 
 function updateItem() {
   const itemId = document.getElementById('edit-id').value;
@@ -87,6 +147,25 @@ function _displayCount(itemCount) {
 }
 
 function _displayItems(data) {
+ 
+  var completecount=0;
+  var incompletecount=0;
+  for(var i=0; i<data.length;i++)
+  {
+    if(data[i].isComplete==true)
+    {
+      completecount++;
+      
+
+     // console.log("iscomplete is true", data[i]);
+    }
+  else{
+    incompletecount++;
+    //console.log("iscomplete is false");
+  }
+  }
+  document.getElementById('completed').innerHTML=completecount;
+  document.getElementById('incomplete').innerHTML=incompletecount;
   const tBody = document.getElementById('todos');
   tBody.innerHTML = '';
 
@@ -97,8 +176,11 @@ function _displayItems(data) {
   data.forEach(item => {
     let isCompleteCheckbox = document.createElement('input');
     isCompleteCheckbox.type = 'checkbox';
-    isCompleteCheckbox.disabled = true;
+    isCompleteCheckbox.disabled = false;
     isCompleteCheckbox.checked = item.isComplete;
+    isCompleteCheckbox.setAttribute('onchange', `testcheckbox(${item.id})`);
+    isCompleteCheckbox.setAttribute('id', `${item.id}`);
+    isCompleteCheckbox.setAttribute('class', 'form-check-input')
 
     let editButton = button.cloneNode(false);
     editButton.innerText = 'Edit';
