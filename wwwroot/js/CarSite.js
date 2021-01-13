@@ -2,6 +2,18 @@ const uri = 'api/Cars';
 const weather='api/WeatherForecast';
 let cars = [];
 
+function searchbymake(){
+  var carmake= document.getElementById("text").value;
+
+ const results = cars.filter(car => car.make.includes(carmake));
+  console.log(results);
+ if(carmake==='')
+ {
+  getCars();
+ }
+  _displayItems(results);
+}
+
 function getall(){
  // Calls the Todoitems api logs the response and then calls the weather api
     fetch(uri) .then(response => response.json())
