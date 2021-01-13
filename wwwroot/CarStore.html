@@ -19,9 +19,9 @@
    New item was added!
     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
   </div></div>
+   <button class="btn btn-primary mb-3" onclick="displayaddform()"><i class="fa fa-plus"></i> Add New Car </button>
    
-   
-    <table class="table table-bordered" id="myTable">
+    <table class="table table-bordered table-hover" id="myTable">
         <thead class="table-light">
             <th>ID</th>
             <th>Make</th>
@@ -38,7 +38,8 @@
 
 
     
-    <h3>Add New Car</h3>
+    
+    <div id="addform"><h3>Add New Car</h3>
     <form action="javascript:void(0);" method="POST" onsubmit="addCar()">
         <div  style="width:25%;">
         <div class="input-group mb-2"> 
@@ -59,23 +60,40 @@
           </div>
           <div class="input-group mb-2"> 
             <span class="input-group-text">Year:</span>
-            <input type="number" class="form-control" id="add-year" placeholder="year" required>
+            <input type="number" class="form-control" id="add-year" placeholder="year" min=0 required>
            <!--  <label for="add-year">Year</label> -->
           </div>
              
-        <input type="submit" class="btn btn-success" value="Add">
+       
+        <button type="submit" class="btn btn-primary"><i class="fa fa-check"></i> Add</button>
+        <a onclick="closeInput()" aria-label="Close" class="btn btn-danger"> Cancel &#10006;</a>
         </div>
     </form>
+</div>
     <div id="editForm">
         <h3>Edit</h3>
         <form action="javascript:void(0);" onsubmit="updateItem()">
-            <input type="hidden" id="edit-id">
-            <input type="text" id="edit-make" required>
-            <input type="text" id="edit-model" required>
-            <input type="number" id="edit-price" required>
-            <input type="number" id="edit-year"  required>
-            <input type="submit" value="Save">
-            <a onclick="closeInput()" aria-label="Close">&#10006;</a>
+
+            <div style="width:25%;">
+                <input type="hidden" id="edit-id">
+                <div class="input-group mb-2"> 
+                    <span class="input-group-text">Make:</span>
+                    <input type="text" class="form-control" id="edit-make" required>
+                </div>
+                <div class="input-group mb-2"> 
+                    <span class="input-group-text">Model:</span>
+                    <input type="text" class="form-control" id="edit-model"  required>
+                </div>
+                <div class="input-group mb-2"> 
+                    <span class="input-group-text">€</span>
+                    <input type="number" class="form-control" id="edit-price"  min=0 required>
+                </div>
+                <div class="input-group mb-2"> 
+                    <span class="input-group-text">Year:</span>
+                    <input type="number" class="form-control" id="edit-year" min=0  required>
+                </div>
+            <button type="submit"  class="btn btn-success" ><i class="fa fa-save"></i> Save</button>
+            <a onclick="closeInput()" aria-label="Close" class="btn btn-danger"> Cancel &#10006;</a>
         </form>
     </div>
     <script src="js/CarSite.js" asp-append-version="true"></script>

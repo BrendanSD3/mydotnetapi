@@ -11,6 +11,7 @@ function getall(){
   }
 
 function getCars() {
+  document.getElementById('addform').style.display = 'none';
   fetch(uri)
     .then(response => response.json())
     .then(data => _displayItems(data))
@@ -49,11 +50,22 @@ the _displayItems function is invoked.
       addModelTextbox.value='';
       addPrice.value='';
       addYear.value='';
-      document.getElementById('itemadded').style.display='block';
+      //document.getElementById('itemadded').style.display='block';
+      tempAlert('',3000);
     })
     .catch(error => console.error('Unable to add item.', error));
 }
-
+function tempAlert(msg,duration)
+{
+  var el =document.getElementById('itemadded');
+     //el.innerHTML = msg;
+     setTimeout(function(){
+      document.getElementById('itemadded').style.display='none';
+      //el.parentNode.removeChild(el);
+     },duration);
+     //document.body.appendChild(el);
+     document.getElementById('itemadded').style.display='block';
+    }
 function deleteItem(id) {
   fetch(`${uri}/${id}`, {
     method: 'DELETE'
@@ -61,7 +73,10 @@ function deleteItem(id) {
   .then(() => getCars())
   .catch(error => console.error('Unable to delete item.', error));
 }
-
+function displayaddform(){
+  document.getElementById('addform').style.display = 'block';
+  document.getElementById('editForm').style.display = 'none';
+}
 function displayEditForm(id) {
   const car = cars.find(car => car.id === id);
   
@@ -71,6 +86,7 @@ function displayEditForm(id) {
   document.getElementById('edit-year').value = car.year;
   document.getElementById('edit-price').value = car.price;
 
+  document.getElementById('addform').style.display = 'none';
   document.getElementById('editForm').style.display = 'block';
 }
 
@@ -102,6 +118,7 @@ function updateItem() {
 
 function closeInput() {
   document.getElementById('editForm').style.display = 'none';
+  document.getElementById('addform').style.display = 'none';
 }
 
 function _displayCount(itemCount) {
