@@ -1,5 +1,14 @@
 const uri = 'api/TodoItems';
+const weather='api/WeatherForecast';
 let todos = [];
+
+function getall(){
+ // Calls the Todoitems api logs the response and then calls the weather api
+    fetch(uri) .then(response => response.json())
+    .then(json => console.log(json)),
+    fetch(weather) .then(response => response.json())
+    .then(json => console.log(json));
+  }
 
 function getItems() {
   fetch(uri)

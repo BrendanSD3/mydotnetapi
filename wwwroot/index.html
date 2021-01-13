@@ -11,7 +11,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
 </head>
 <body class="container">
-
+    <a href="CarStore.html">View Car Store</a>
     <h1 style="text-align:center">To-do List</h1>
    <div id="itemadded" style="display:none;" class="alert alert-success alert-dismissible fade show" role="alert">
    New item was added!
@@ -38,7 +38,7 @@
       Not Completed: <span class="badge bg-info" id="incomplete"></span>
       
     </button>
-    <table class="table table-bordered">
+    <table class="table table-bordered" id="myTable">
         <thead class="table-light">
             <th>Is Complete?</th>
             <th>Task</th>
@@ -56,6 +56,7 @@
     <script src="js/site.js" asp-append-version="true"></script>
     <script type="text/javascript">
         getItems();
+       
     </script>
 </body>
 </html>

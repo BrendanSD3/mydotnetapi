@@ -13,6 +13,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using Microsoft.EntityFrameworkCore;
 using TodoApi.Models;
+using CarsAPI.Models;
 namespace TodoApi
 {
     public class Startup
@@ -28,6 +29,7 @@ namespace TodoApi
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<TodoContext>(opt =>opt.UseInMemoryDatabase("TodoList"));
+            services.AddDbContext<CarsContext>(opt =>opt.UseInMemoryDatabase("Cars"));
             services.AddControllers();
             // Register the Swagger generator, defining 1 or more Swagger documents
             services.AddSwaggerGen();
