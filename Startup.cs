@@ -17,7 +17,8 @@ using CarsAPI.Models;
 namespace TodoApi
 {
     public class Startup
-    {
+    { 
+        readonly string MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
         public Startup(IConfiguration configuration)
         {
             
@@ -35,7 +36,17 @@ namespace TodoApi
             services.AddControllers();
             // Register the Swagger generator, defining 1 or more Swagger documents
             services.AddSwaggerGen();
-
+            services.AddCors(options =>
+            {
+             options.AddPolicy(MyAllowSpecificOrigins,
+             builder =>
+                 {
+            builder.WithOrigins("https://",
+                                "https://brendansd3.github.io/")
+                                .AllowAnyHeader()
+                                .AllowAnyMethod();
+              });
+             });
 
             // services.AddSwaggerGen(c =>
             //{
@@ -60,7 +71,7 @@ namespace TodoApi
                 });
             }
 
-
+            app.UseCors(MyAllowSpecificOrigins);
 
             app.UseDefaultFiles();
             app.UseStaticFiles();
