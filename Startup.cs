@@ -20,6 +20,7 @@ namespace TodoApi
     {
         public Startup(IConfiguration configuration)
         {
+            
             Configuration = configuration;
         }
 
@@ -28,16 +29,17 @@ namespace TodoApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<TodoContext>(opt =>opt.UseInMemoryDatabase("TodoList"));
-            services.AddDbContext<CarsContext>(opt =>opt.UseInMemoryDatabase("Cars"));
+            services.AddDbContext<TodoContext>(opt => opt.UseInMemoryDatabase("TodoList"));
+
+            services.AddDbContext<CarsContext>(opt => opt.UseSqlite(Configuration.GetConnectionString("CarsDB")));
             services.AddControllers();
             // Register the Swagger generator, defining 1 or more Swagger documents
             services.AddSwaggerGen();
 
 
-           // services.AddSwaggerGen(c =>
+            // services.AddSwaggerGen(c =>
             //{
-             //   c.SwaggerDoc("v1", new OpenApiInfo { Title = "TodoApi", Version = "v1" });
+            //   c.SwaggerDoc("v1", new OpenApiInfo { Title = "TodoApi", Version = "v1" });
             //});
         }
 
@@ -46,14 +48,17 @@ namespace TodoApi
         {
             if (env.IsDevelopment())
             {
-                
+
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();
-                app.UseSwaggerUI(c => 
+                app.UseSwaggerUI(c =>
                 {
                     c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API v1");
                 });
             }
+
+
+
             app.UseDefaultFiles();
             app.UseStaticFiles();
 
