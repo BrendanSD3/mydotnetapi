@@ -15,6 +15,7 @@ namespace TodoApi
         {
              using (var db = new CarsContext())
             {
+                
                 // Create
                 Console.WriteLine("Inserting a new car");
                 db.Add(new Car {Make="porsche",Model="911",Price=1000,Year=2011 });
