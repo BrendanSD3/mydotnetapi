@@ -17,7 +17,7 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
-    "TodoApi": {
+    "CarsAPI": {
       "commandName": "Project",
       "dotnetRunMessages": "true",
       "launchBrowser": true,

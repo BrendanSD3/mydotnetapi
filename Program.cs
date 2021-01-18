@@ -18,7 +18,11 @@ namespace CarsAPI
                 
                 // Create
                 Console.WriteLine("Inserting a new car");
-                db.Add(new Car {Make="porsche",Model="911",Price=1000,Year=2011 });
+                db.Add(new Car {Make="Mclaren",Model="P1",Price=10000000,Year=2020 });
+                db.Add(new Car {Make="Buggati",Model="Chiron",Price=2000000,Year=2010 });
+                db.Add(new Car {Make="Ford",Model="Focus",Price=9000,Year=2011 });
+                db.Add(new Car {Make="Porsche",Model="918 Spyder",Price=50000000,Year=2020 });
+                db.Add(new Car {Make="Porsche",Model="911",Price=1200000,Year=2011 });
                 db.SaveChanges();
 
                 // Read
