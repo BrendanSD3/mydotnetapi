@@ -19,6 +19,9 @@ namespace CarsAPI.Controllers
         {
             _context = context;
         }
+          /// <summary>
+        /// Gets all Cars.
+        /// </summary>
         // GET: api/GetCars
         [HttpGet]
         public async Task<ActionResult<IEnumerable<CarDTO>>> GetCars()
@@ -28,6 +31,10 @@ namespace CarsAPI.Controllers
                 .ToListAsync();
         }
 
+        /// <summary>
+        /// Gets a specific Car by ID.
+        /// </summary>
+        /// <param name="id"></param>  
         [HttpGet("{id}")]
         public async Task<ActionResult<CarDTO>> GetCar(long id)
         {
@@ -41,6 +48,9 @@ namespace CarsAPI.Controllers
             return ItemToDTO(car);
         }
 
+          /// <summary>
+        /// Updates a specific Car by ID.
+        /// </summary>
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateCar(long id, CarDTO CarDTO)
         {
@@ -71,7 +81,9 @@ namespace CarsAPI.Controllers
 
             return NoContent();
         }
-
+          /// <summary>
+        /// Creates a new Car.
+        /// </summary>
         [HttpPost]
         public async Task<ActionResult<CarDTO>> CreateCar(CarDTO CarDTO)
         {
@@ -92,6 +104,9 @@ namespace CarsAPI.Controllers
                 ItemToDTO(car));
         }
 
+        /// <summary>
+        /// Deletes a specific Car.
+        /// </summary>
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteTodoItem(long id)
         {

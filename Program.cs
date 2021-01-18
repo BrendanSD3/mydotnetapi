@@ -7,7 +7,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using CarsAPI.Models;
-namespace TodoApi
+namespace CarsAPI
 {
     public class Program
     {

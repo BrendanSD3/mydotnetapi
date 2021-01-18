@@ -23,7 +23,7 @@ namespace CarsAPI.Models
         protected override void OnConfiguring(DbContextOptionsBuilder options)
             => options.UseSqlite("Data Source=Cars.db");
         public DbSet<Car> MyCars { get; set; }
-
+        public DbSet<User> Users{get; set;}
 
     }
 }

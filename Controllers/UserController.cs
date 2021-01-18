@@ -27,7 +27,7 @@ namespace CarsAPI.Controllers
                 .Select(x => ItemToDTO(x))
                 .ToListAsync();
         } */
-
+        
         [HttpGet("{id}")]
         public async Task<ActionResult<UserDTO>> GetUser(long id)
         {

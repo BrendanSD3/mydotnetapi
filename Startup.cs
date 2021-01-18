@@ -12,9 +12,12 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using Microsoft.EntityFrameworkCore;
-using TodoApi.Models;
+//using TodoApi.Models;
 using CarsAPI.Models;
-namespace TodoApi
+using System.Reflection;
+using System.IO;
+
+namespace CarsAPI
 {
     public class Startup
     { 
@@ -30,7 +33,7 @@ namespace TodoApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<TodoContext>(opt => opt.UseInMemoryDatabase("TodoList"));
+           // services.AddDbContext<TodoContext>(opt => opt.UseInMemoryDatabase("TodoList"));
 
             services.AddDbContext<CarsContext>(opt => opt.UseSqlite(Configuration.GetConnectionString("CarsDB")));
             services.AddControllers();
@@ -48,10 +51,30 @@ namespace TodoApi
               });
              });
 
-            // services.AddSwaggerGen(c =>
-            //{
-            //   c.SwaggerDoc("v1", new OpenApiInfo { Title = "TodoApi", Version = "v1" });
-            //});
+             services.AddSwaggerGen(c =>
+            {
+              c.SwaggerDoc("v2", new OpenApiInfo
+    {
+        Version = "v2",
+        Title = "Cars API",
+        Description = "An API for the DemoCar Store",
+        Contact = new OpenApiContact
+        {
+            Name = "Brendan Wall",
+            Email = string.Empty,
+            Url = new Uri("https://github.com/BrendanSD3"),
+        },
+        License = new OpenApiLicense
+        {
+            Name = "Use under LICX",
+            Url = new Uri("https://example.com/license"),
+        }
+    });
+     // Set the comments path for the Swagger JSON and UI.
+        var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+        var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+        c.IncludeXmlComments(xmlPath);
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -67,7 +90,7 @@ namespace TodoApi
                 app.UseSwagger();
                 app.UseSwaggerUI(c =>
                 {
-                    c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API v1");
+                    c.SwaggerEndpoint("/swagger/v2/swagger.json", "Cars API v2");
                 });
             }
 
