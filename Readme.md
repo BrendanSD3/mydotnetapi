@@ -6,3 +6,4 @@ Handy trick i learned for creating a dotnet gitignore file
 
 - [x] I hope to deploy this to heroku soon using a buildpack
 - [x] Deployed to heroku https://mydotnetapi.herokuapp.com/
+- [x] Updated Heroku stack to 22
